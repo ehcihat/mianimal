@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import './App.css'
 import Typography from '@mui/material/Typography';
 
-function App() {
+function Ficha() {
   const [count, setCount] = useState(0)
   const datos = {
     animal: 'mapache',
@@ -16,7 +16,7 @@ function App() {
 
 
   return (
-    <>
+   
       <Stack direction= {{xs: 'column', sm: 'column'}} spacing={{xs: 1, sm:1, md: 1}} sx={{justifyContent: 'center', alignItems: 'center',}}>
         
         <Avatar src={datos.imageUrl} sx={{ width: datos.imageSize, height: datos.imageSize }} />
@@ -25,8 +25,8 @@ function App() {
 
         <Button variant='contained' onClick={() => setCount(count + 1)} size='large' color='secondary'>Me has hecho: {count} rascaditas</Button>
       </Stack>
-    </>
+
   );
 }
 
-export default App
+export default Ficha
