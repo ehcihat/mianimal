@@ -1,32 +1,57 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import './App.css'
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import { styled } from '@mui/material/styles';
+import InfoIcon from '@mui/icons-material/Info';
+import { CustomButton } from 'milibreria';
+const CustomCard = styled(Card)(({ theme }) => ({
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[3],
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
 
-function Ficha() {
-  const [count, setCount] = useState(0)
-  const datos = {
-    animal: 'mapache',
-    imageUrl: '../public/mapache.png',
-    imageSize: 300,
+}));
 
-  }
+function Ficha({ animal }) {
+    const [count, setCount] = useState(0);
+    const article = animal.animal === 'tortuga' ? 'una' : 'un';
 
+    return (
+        <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={0} sx={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Avatar src={animal.imageUrl} sx={{ width: animal.imageSize, height: animal.imageSize }} />
+            <CustomCard sx={{ maxWidth: 300, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <CardContent>
+                    <Typography variant='h4' component='h2' textAlign="center" gutterBottom>
+                        Hola, soy {article} {animal.animal}.
+                    </Typography>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                        <InfoIcon />
+                        <Typography variant='h6'>Atributo: {animal.atribute}</Typography>
+                    </Stack>
+                    <Typography variant='body1' sx={{ marginTop: 1 }}>
+                        {animal.description}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <CustomButton
+                        onClick={() => setCount(count + 1)}
+                        size='small'
+                        text={`Me has hecho: ${count} rascaditas`}
+                        txtcolor='white'  
+                        bgcolor='red'  
+                    >
+                        Me has hecho: {count} rascaditas
+                    </CustomButton>
 
-  return (
-   
-      <Stack direction= {{xs: 'column', sm: 'column'}} spacing={{xs: 1, sm:1, md: 1}} sx={{justifyContent: 'center', alignItems: 'center',}}>
-        
-        <Avatar src={datos.imageUrl} sx={{ width: datos.imageSize, height: datos.imageSize }} />
-
-        <Typography variant='h3' component='h2'>Hola, soy yo, {datos.animal}. Eres un crack así que dale click anda:</Typography>
-
-        <Button variant='contained' onClick={() => setCount(count + 1)} size='large' color='secondary'>Me has hecho: {count} rascaditas</Button>
-      </Stack>
-
-  );
+                </CardActions>
+            </CustomCard>
+        </Stack>
+    );
 }
 
-export default Ficha
+export default Ficha;
